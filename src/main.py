@@ -1,10 +1,14 @@
 from parser import load_transactions
 from categoriser import categorise
-from analyser import calculate_summary
+from analyser import calculate_summary, category_breakdown
 
 transactions = load_transactions("../data/sample_transactions.csv")
 
-income, expenses = calculate_summary(transactions)
+for t in transactions:
+    t["category"] = categorise(t)
 
-print(f"Income: {income}")
-print(f"Expenses: {expenses}")
+income, expenses = calculate_summary(transactions)
+print(f"Income: {income}, Expenses: {expenses}")
+
+cat_summary = category_breakdown(transactions)
+print("Category breakdown:", cat_summary)
