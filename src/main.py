@@ -25,8 +25,12 @@ while (True):
     elif option_wanted == "2":
         cat_summary = category_breakdown(transactions)
         print("\n--- Category Breakdown: ---")
+        total = sum(cat_summary.values())
+
         for cat, value in cat_summary.items():
-            print(f"- {cat}: ${value}")
+            percent = (value / total) * 100
+            print(f"{cat}: ${value:.2f} ({percent:.1f}%)")
+            
         print("---------------------------")
     elif option_wanted in ["end", "exit"]:
         print("----------------")
